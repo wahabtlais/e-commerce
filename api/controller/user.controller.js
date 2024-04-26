@@ -1,9 +1,10 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
+import asyncHandler from "express-async-handler";
 
 // Register a new user
 
-export const register = async (req, res, next) => {
+export const register = asyncHandler(async (req, res, next) => {
 	const email = req.body.email;
 	const findUser = await User.findOne({ email });
 
@@ -28,6 +29,6 @@ export const register = async (req, res, next) => {
 		}
 	} else {
 		// Send an error message
-		res.status(409).json({ message: "User already exist!", success: false });
+		throw new Error("User already exist!");
 	}
-};
+});
