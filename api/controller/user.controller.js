@@ -45,15 +45,16 @@ export const deleteUser = asyncHandler(async (req, res, next) => {
 });
 //! Update user by id
 export const updateUser = asyncHandler(async (req, res, next) => {
-	if (req.user.id !== req.params.id)
-		return next(error(401, "You are not authorized to update this user!"));
+	const { _id } = req.user;
+
+	if (!_id) return next(error(401, "Invalid user ID in request!"));
 
 	try {
 		if (req.body.password) {
 			req.body.password = bcrypt.hashSync(req.body.password, 10);
 		}
 		const updatedUser = await User.findByIdAndUpdate(
-			req.params.id,
+			_id,
 			{
 				$set: {
 					firstname: req.body.firstname,
@@ -71,5 +72,49 @@ export const updateUser = asyncHandler(async (req, res, next) => {
 		return res.status(200).json(rest);
 	} catch (error) {
 		console.log(error);
+	}
+});
+
+//! Block user
+export const blockUser = asyncHandler(async (req, res, next) => {
+	const { id } = req.params;
+
+	try {
+		const block = await User.findByIdAndUpdate(
+			id,
+			{
+				$set: {
+					isBlocked: true,
+				},
+			},
+			{ new: true }
+		);
+		res.status(200).json({
+			message: "User blocked successfully!",
+		});
+	} catch (error) {
+		throw new Error(error);
+	}
+});
+
+//! Unblock user
+export const unblockUser = asyncHandler(async (req, res) => {
+	const { id } = req.params;
+
+	try {
+		const unblock = await User.findByIdAndUpdate(
+			id,
+			{
+				$set: {
+					isBlocked: false,
+				},
+			},
+			{ new: true }
+		);
+		res.status(200).json({
+			message: "User unblocked successfully!",
+		});
+	} catch (error) {
+		throw new Error(error);
 	}
 });

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 // Declare the Schema of the Mongo model
 const userSchema = new mongoose.Schema(
@@ -34,6 +34,26 @@ const userSchema = new mongoose.Schema(
 			type: Boolean,
 			default: false,
 		},
+		isBlocked: {
+			type: Boolean,
+			default: false,
+		},
+		cart: {
+			type: Array,
+			default: [],
+		},
+		address: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Address",
+			},
+		],
+		wishlist: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Product",
+			},
+		],
 	},
 	{
 		timestamps: true,
