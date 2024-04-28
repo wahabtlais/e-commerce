@@ -1,61 +1,75 @@
-import User from "../models/user.model.js";
-import bcrypt from "bcrypt";
 import asyncHandler from "express-async-handler";
-import jwt from "jsonwebtoken";
+import User from "../models/user.model.js";
+import { error } from "../utils/error.js";
+import bcrypt from "bcrypt";
 
-// Register a new user
-
-export const register = asyncHandler(async (req, res, next) => {
-	const email = req.body.email;
-	const findUser = await User.findOne({ email });
-
-	if (!findUser) {
-		// Create a new user
-		const { firstname, lastname, email, mobile, password } = req.body;
-		const hashedPassword = bcrypt.hashSync(password, 10);
-		const newUser = new User({
-			firstname,
-			lastname,
-			email,
-			mobile,
-			password: hashedPassword,
-		});
-		try {
-			await newUser.save();
-			res
-				.status(201)
-				.json({ message: "User created successfully!", success: true });
-		} catch (error) {
-			next(error);
-		}
-	} else {
-		// Send an error message
-		throw new Error("User already exist!");
+//! Get all users
+export const allUsers = asyncHandler(async (req, res, next) => {
+	try {
+		const getUsers = await User.find({}, { __v: false, password: false });
+		res.status(200).json(getUsers);
+	} catch (error) {
+		next(error);
 	}
 });
 
-// Login a user
-export const login = asyncHandler(async (req, res, next) => {
-	const { email, password } = req.body;
+//! Get user by id
+export const getUser = asyncHandler(async (req, res, next) => {
 	try {
-		const validUser = await User.findOne({ email });
-		if (!validUser)
-			return res
-				.status(404)
-				.json({ message: "User not found!", success: false });
-		const validPassword = bcrypt.compareSync(password, validUser.password);
-		if (!validPassword)
-			return res
-				.status(403)
-				.json({ message: "Invalid Credentials", success: false });
-		const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
-		const { password: hashedPassword, ...rest } = validUser._doc;
-		const expiryDate = new Date(Date.now() + 3600000); // 1 hour
-		res
-			.cookie("access_token", token, { httpOnly: true, expires: expiryDate })
-			.status(200)
-			.json(rest);
+		const user = await User.findById(req.params.id);
+
+		if (!user) return next(new ErrorResponse("User not found!", 404));
+		const { password: pass, ...rest } = user._doc; // Remove password field while sending response
+
+		res.status(200).json(rest);
 	} catch (error) {
-		next(error);
+		throw new Error(error);
+	}
+});
+
+//! Delete user by id
+export const deleteUser = asyncHandler(async (req, res, next) => {
+	if (req.user.id !== req.params.id)
+		return next(error(401, "You are not authorized to delete this user!"));
+
+	try {
+		await User.findByIdAndDelete(req.params.id);
+		res.clearCookie("access_token");
+		res.status(200).json({
+			success: true,
+			message: "User deleted successfully!",
+		});
+	} catch (error) {
+		throw new Error(error);
+	}
+});
+//! Update user by id
+export const updateUser = asyncHandler(async (req, res, next) => {
+	if (req.user.id !== req.params.id)
+		return next(error(401, "You are not authorized to update this user!"));
+
+	try {
+		if (req.body.password) {
+			req.body.password = bcrypt.hashSync(req.body.password, 10);
+		}
+		const updatedUser = await User.findByIdAndUpdate(
+			req.params.id,
+			{
+				$set: {
+					firstname: req.body.firstname,
+					lastname: req.body.lastname,
+					email: req.body.email,
+					mobile: req.body.mobile,
+					password: req.body.password,
+					profilePicture: req.body.profilePicture,
+					isAdmin: req.body.isAdmin,
+				},
+			},
+			{ new: true }
+		);
+		const { password, ...rest } = updatedUser._doc;
+		return res.status(200).json(rest);
+	} catch (error) {
+		console.log(error);
 	}
 });
