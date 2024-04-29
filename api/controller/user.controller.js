@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import User from "../models/user.model.js";
 import { error } from "../utils/error.js";
 import bcrypt from "bcrypt";
+import { validateMongoID } from "../utils/validateMongoID.js";
 
 //! Get all users
 export const allUsers = asyncHandler(async (req, res, next) => {
@@ -47,8 +48,7 @@ export const deleteUser = asyncHandler(async (req, res, next) => {
 export const updateUser = asyncHandler(async (req, res, next) => {
 	const { _id } = req.user;
 
-	if (!_id) return next(error(401, "Invalid user ID in request!"));
-
+	validateMongoID(_id);
 	try {
 		if (req.body.password) {
 			req.body.password = bcrypt.hashSync(req.body.password, 10);
@@ -78,7 +78,7 @@ export const updateUser = asyncHandler(async (req, res, next) => {
 //! Block user
 export const blockUser = asyncHandler(async (req, res, next) => {
 	const { id } = req.params;
-
+	validateMongoID(id);
 	try {
 		const block = await User.findByIdAndUpdate(
 			id,
@@ -100,7 +100,7 @@ export const blockUser = asyncHandler(async (req, res, next) => {
 //! Unblock user
 export const unblockUser = asyncHandler(async (req, res) => {
 	const { id } = req.params;
-
+	validateMongoID(id);
 	try {
 		const unblock = await User.findByIdAndUpdate(
 			id,

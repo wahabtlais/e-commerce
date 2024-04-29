@@ -2,6 +2,7 @@ import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
+import { generateRefreshToken } from "../config/refreshToken.js";
 
 //! Register a new user
 export const register = asyncHandler(async (req, res, next) => {
@@ -47,15 +48,41 @@ export const login = asyncHandler(async (req, res, next) => {
 			return res
 				.status(403)
 				.json({ message: "Invalid Credentials", success: false });
-		const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET, {
-			expiresIn: "1d",
-		});
+
+		const refreshToken = generateRefreshToken(validUser?._id);
+		// Save refresh token to database
+		const updateUser = await User.findByIdAndUpdate(
+			validUser._id,
+			{ refreshToken },
+			{ new: true }
+		);
 		const { password: hashedPassword, ...rest } = validUser._doc;
 		res
-			.cookie("access_token", token, { httpOnly: true })
+			.cookie("refresh_token", refreshToken, {
+				httpOnly: true,
+				maxAge: 72 * 60 * 60 * 1000,
+			})
 			.status(200)
 			.json(rest);
 	} catch (error) {
 		next(error);
 	}
+});
+
+//! Handle Refresh Token
+export const handleRefreshToken = asyncHandler(async (req, res) => {
+	const cookie = req.cookies;
+	if (!cookie?.refresh_token) throw new Error("No refresh token!");
+	const refreshToken = cookie.refresh_token;
+	const user = await User.findOne({ refreshToken });
+	if (!user) throw new Error("No user found!");
+	jwt.verify(refreshToken, process.env.JWT_SECRET, (err, decoded) => {
+		if (err || user.id !== decoded.id) {
+			throw new Error("Something went wrong with refresh token!");
+		}
+		const access_token = jwt.sign({ id: user?._id }, process.env.JWT_SECRET, {
+			expiresIn: "1d",
+		});
+		res.status(200).json({ access_token });
+	});
 });
