@@ -6,6 +6,7 @@ import userRouter from "./routes/user.route.js";
 import bodyParser from "body-parser";
 import { errorHandler, notFound } from "./middlewares/errorHandler.js";
 import cookieParser from "cookie-parser";
+import productRouter from "./routes/product.route.js";
 
 dotenv.config();
 dbConnect();
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/product", productRouter);
 
 app.use(notFound);
 app.use(errorHandler);
