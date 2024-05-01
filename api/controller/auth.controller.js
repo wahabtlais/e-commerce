@@ -69,6 +69,36 @@ export const login = asyncHandler(async (req, res, next) => {
 	}
 });
 
+//! Logout
+export const logout = asyncHandler(async (req, res, next) => {
+	const cookie = req.cookies;
+	const refreshToken = cookie.refresh_token;
+
+	if (!refreshToken) {
+		return res.status(400).json({ message: "Refresh token is required" });
+	}
+
+	// Set the refresh token field to an empty string
+	try {
+		await User.findOneAndUpdate({ refreshToken }, { refreshToken: "" });
+	} catch (error) {
+		return res
+			.status(500)
+			.json({ message: "Failed to clear refresh token from user" });
+	}
+
+	// Clear the refresh token cookie
+	res.clearCookie("refresh_token", {
+		httpOnly: true,
+		secure: true,
+	});
+	// res.clearCookie("access_token");
+
+	// res.setHeader("Authorization", ""); // Clear the Authorization header
+
+	return res.sendStatus(204); // No content
+});
+
 //! Handle Refresh Token
 export const handleRefreshToken = asyncHandler(async (req, res) => {
 	const cookie = req.cookies;
