@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 import { errorHandler, notFound } from "./middlewares/errorHandler.js";
 import cookieParser from "cookie-parser";
 import productRouter from "./routes/product.route.js";
+import morgan from "morgan";
 
 dotenv.config();
 dbConnect();
@@ -14,6 +15,7 @@ dbConnect();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
