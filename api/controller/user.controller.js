@@ -18,13 +18,14 @@ export const allUsers = asyncHandler(async (req, res, next) => {
 
 //! Get user by id
 export const getUser = asyncHandler(async (req, res, next) => {
+	const { id } = req.params;
+	validateMongoID(id);
 	try {
-		const user = await User.findById(req.params.id);
+		const user = await User.findById(id);
 
 		if (!user) return next(new ErrorResponse("User not found!", 404));
-		const { password: pass, ...rest } = user._doc; // Remove password field while sending response
 
-		res.status(200).json(rest);
+		res.status(200).json(user);
 	} catch (error) {
 		throw new Error(error);
 	}
@@ -46,33 +47,45 @@ export const deleteUser = asyncHandler(async (req, res, next) => {
 		throw new Error(error);
 	}
 });
-//! Update user by id
-export const updateUser = asyncHandler(async (req, res, next) => {
-	const { _id } = req.user;
 
+//! Update user by id
+export const updateUser = asyncHandler(async (req, res) => {
+	const { _id } = req.user;
 	validateMongoID(_id);
+
 	try {
-		if (req.body.password) {
-			req.body.password = bcrypt.hashSync(req.body.password, 10);
-		}
 		const updatedUser = await User.findByIdAndUpdate(
 			_id,
 			{
-				$set: {
-					firstname: req.body.firstname,
-					lastname: req.body.lastname,
-					email: req.body.email,
-					mobile: req.body.mobile,
-					password: req.body.password,
-					profilePicture: req.body.profilePicture,
-				},
+				firstname: req?.body?.firstname,
+				lastname: req?.body?.lastname,
+				email: req?.body?.email,
+				mobile: req?.body?.mobile,
+				profilePicture: req?.body?.profilePicture,
 			},
-			{ new: true }
+			{
+				new: true,
+			}
 		);
-		const { password, ...rest } = updatedUser._doc;
-		return res.status(200).json(rest);
+		res.json(updatedUser);
 	} catch (error) {
-		console.log(error);
+		throw new Error(error);
+	}
+});
+
+//! Update password by id
+export const updatePassword = asyncHandler(async (req, res) => {
+	console.log(req.user);
+	const { _id } = req.user;
+	const { password } = req.body;
+	validateMongoID(_id);
+	const user = await User.findById(_id);
+	if (password) {
+		user.password = password;
+		const updatedPassword = await user.save();
+		res.json(updatedPassword);
+	} else {
+		res.json(user);
 	}
 });
 
@@ -149,19 +162,51 @@ export const forgotPasswordToken = asyncHandler(async (req, res, next) => {
 });
 
 //! Reset Password
-export const resetPassword = asyncHandler(async (req, res, next) => {
-	const { token } = req.params;
+export const resetPassword = asyncHandler(async (req, res) => {
 	const { password } = req.body;
+	const { token } = req.params;
 	const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
 	const user = await User.findOne({
 		passwordResetToken: hashedToken,
 		passwordResetExpires: { $gt: Date.now() },
 	});
-	if (!user) throw new Error("Token expired, please try again later!");
-	const hashedPassword = bcrypt.hashSync(password, 10);
-	user.password = hashedPassword;
+	if (!user) throw new Error(" Token Expired, Please try again later");
+	user.password = password;
 	user.passwordResetToken = undefined;
 	user.passwordResetExpires = undefined;
 	await user.save();
-	res.json({ message: "Password has been reset successfully!", success: true });
+	res.json(user);
+});
+
+//! Get Wishlist
+export const getWishlist = asyncHandler(async (req, res, next) => {
+	const { _id } = req.user;
+	validateMongoID(_id);
+	try {
+		const findUser = await User.findById(_id).populate("wishlist");
+		res.json(findUser);
+	} catch (error) {
+		next(error);
+	}
+});
+
+//! Save Address
+export const saveAddress = asyncHandler(async (req, res, next) => {
+	const { _id } = req.user;
+	validateMongoID(_id);
+
+	try {
+		const updateUser = await User.findByIdAndUpdate(
+			_id,
+			{
+				address: req?.body?.address,
+			},
+			{
+				new: true,
+			}
+		);
+		res.json(updateUser);
+	} catch (error) {
+		next(error);
+	}
 });

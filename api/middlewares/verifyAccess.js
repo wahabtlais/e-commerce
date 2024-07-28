@@ -34,8 +34,8 @@ export const verifyUser = asyncHandler(async (req, res, next) => {
 });
 
 export const verifyAdmin = asyncHandler(async (req, res, next) => {
-	const { id } = req.user.id;
-	const adminUser = await User.findOne({ id });
+	const { _id } = req.user;
+	const adminUser = await User.findOne({ _id });
 
 	if (adminUser.isAdmin !== true) {
 		throw new Error(
