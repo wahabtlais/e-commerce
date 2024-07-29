@@ -1,4 +1,6 @@
+import Cart from "../models/cart.model.js";
 import Coupon from "../models/coupon.model.js";
+import User from "../models/user.model.js";
 import { validateMongoID } from "../utils/validateMongoID.js";
 import asyncHandler from "express-async-handler";
 
@@ -56,6 +58,39 @@ export const getAllCoupons = asyncHandler(async (req, res, next) => {
 			status: "success",
 			coupons,
 		});
+	} catch (error) {
+		next(error);
+	}
+});
+
+export const applyCoupon = asyncHandler(async (req, res, next) => {
+	const { coupon } = req.body;
+	const { _id } = req.user;
+	validateMongoID(_id);
+
+	try {
+		const validCoupon = await Coupon.findOne({ name: coupon });
+		if (validCoupon === null) {
+			return res.status(404).json({
+				status: "error",
+				message: "Coupon not found",
+			});
+		}
+		const user = await User.findOne({ _id });
+		let { cartTotal } = await Cart.findOne({ orderedBy: user._id }).populate(
+			"products.product"
+		);
+
+		let totalAfterDiscount = (
+			cartTotal -
+			(cartTotal * validCoupon.discount) / 100
+		).toFixed(2);
+		await Cart.findOneAndUpdate(
+			{ orderedBy: user._id },
+			{ totalAfterDiscount },
+			{ new: true }
+		);
+		res.json(totalAfterDiscount);
 	} catch (error) {
 		next(error);
 	}

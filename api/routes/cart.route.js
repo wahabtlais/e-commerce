@@ -1,14 +1,16 @@
 import express from "express";
 
 import { verifyAdmin, verifyUser } from "../middlewares/verifyAccess.js";
-import { userCart } from "../controller/cart.controller.js";
+import {
+	addToCart,
+	emptyCart,
+	getUserCart,
+} from "../controller/cart.controller.js";
 
 const router = express.Router();
 
-// router.get("/", verifyUser, verifyAdmin, getAllCoupons);
-// router.get("/:id", verifyUser, verifyAdmin, getCoupon);
-router.post("/", verifyUser, userCart);
-// router.post("/update/:id", verifyUser, verifyAdmin, updateCoupon);
-// router.delete("/delete/:id", verifyUser, verifyAdmin, deleteCoupon);
+router.get("/", verifyUser, getUserCart);
+router.post("/add-to-cart", verifyUser, addToCart);
+router.delete("/empty-cart", verifyUser, emptyCart);
 
 export default router;

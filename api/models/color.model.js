@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 // Declare the Schema of the Mongo model
-const brandSchema = new mongoose.Schema(
+const colorSchema = new mongoose.Schema(
 	{
-		title: {
+		name: {
 			type: String,
 			required: true,
 			unique: true,
@@ -16,6 +16,6 @@ const brandSchema = new mongoose.Schema(
 );
 
 //Export the model
-const Brand = mongoose.model("Brand", brandSchema);
+const Color = mongoose.model("Color", colorSchema);
 
-export default Brand;
+export default Color;

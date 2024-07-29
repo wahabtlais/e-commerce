@@ -65,12 +65,26 @@ export const blogImgResize = async (req, res, next) => {
 	if (!req.files) return next();
 	await Promise.all(
 		req.files.map(async (file) => {
+			const outputPath = path.join(
+				__dirname,
+				`../public/images/blogs/${file.filename}`
+			);
 			await sharp(file.path)
 				.resize(300, 300)
 				.toFormat("jpeg")
 				.jpeg({ quality: 90 })
-				.toFile(`public/images/blogs/${file.filename}`); //C:\Users\pc\Desktop\Pending Projects\mern-e-commerce\api\public\images\products
-			fs.unlinkSync(`public/images/blogs/${file.filename}`);
+				.toFile(outputPath);
+			// fs.unlinkSync(outputPath);
+			if (await fs.pathExists(outputPath)) {
+				try {
+					await fs.remove(outputPath);
+					console.log(`Successfully deleted file at ${outputPath}`);
+				} catch (err) {
+					console.error(`Error deleting file at ${outputPath}:`, err);
+				}
+			} else {
+				console.warn(`File at path ${outputPath} does not exist.`);
+			}
 		})
 	);
 	next();

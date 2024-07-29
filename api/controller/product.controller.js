@@ -4,7 +4,10 @@ import slugify from "slugify";
 import { error } from "../utils/error.js";
 import User from "../models/user.model.js";
 import { validateMongoID } from "../utils/validateMongoID.js";
-import { cloudinaryUploadImg } from "../utils/cloudinary.js";
+import {
+	cloudinaryDeleteImg,
+	cloudinaryUploadImg,
+} from "../utils/cloudinary.js";
 import fs from "fs-extra";
 
 export const createProduct = asyncHandler(async (req, res, next) => {
@@ -199,12 +202,24 @@ export const uploadImages = asyncHandler(async (req, res) => {
 			urls.push(newpath);
 			console.log("newpath:", newpath);
 			console.log("path:", path);
-			fs.unlinkSync(path);
+			// fs.unlinkSync(path);
 		}
 		const images = urls.map((file) => {
 			return file;
 		});
 		res.json(images);
+	} catch (error) {
+		throw new Error(error);
+	}
+});
+export const deleteImages = asyncHandler(async (req, res) => {
+	const { id } = req.params;
+	try {
+		const deleted = cloudinaryDeleteImg(id, "images");
+		if (!deleted) {
+			return res.status(404).json({ message: "Image not found!" });
+		}
+		res.json({ message: "Image deleted successfully!" });
 	} catch (error) {
 		throw new Error(error);
 	}

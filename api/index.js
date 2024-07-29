@@ -14,6 +14,9 @@ import blogCategoryRouter from "./routes/blogCategory.route.js";
 import brandRouter from "./routes/brand.route.js";
 import couponRouter from "./routes/coupon.route.js";
 import cartRouter from "./routes/cart.route.js";
+import orderRouter from "./routes/order.route.js";
+import colorRouter from "./routes/color.route.js";
+import inquiryRouter from "./routes/inquiry.route.js";
 
 dotenv.config();
 dbConnect();
@@ -34,6 +37,9 @@ app.use("/api/blog-category", blogCategoryRouter);
 app.use("/api/brand", brandRouter);
 app.use("/api/coupon", couponRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/order", orderRouter);
+app.use("/api/color", colorRouter);
+app.use("/api/inquiry", inquiryRouter);
 
 app.use(notFound);
 app.use(errorHandler);

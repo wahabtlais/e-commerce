@@ -21,7 +21,7 @@ export const updateBrand = asyncHandler(async (req, res, next) => {
 			new: true,
 		});
 		if (!updatedBrand) {
-			return next(error("Blog category not found!"));
+			throw new Error("Brand not found!");
 		}
 		res.json({ status: "success", updatedBrand });
 	} catch (error) {
@@ -34,11 +34,11 @@ export const deleteBrand = asyncHandler(async (req, res, next) => {
 	try {
 		const deletedBrand = await Brand.findByIdAndDelete(id);
 		if (!deletedBrand) {
-			return next(error("Blog category not found!"));
+			throw new Error("Brand not found!");
 		}
 		res.json({
 			status: "success",
-			message: "Blog category deleted successfully!",
+			message: "Brand deleted successfully!",
 			deletedBrand,
 		});
 	} catch (error) {
@@ -53,7 +53,7 @@ export const getBrand = asyncHandler(async (req, res, next) => {
 	try {
 		const brand = await Brand.findById(id);
 		if (!brand) {
-			return next(error("Blog category not found!"));
+			throw new Error("Brand not found!");
 		}
 		res.json({ status: "success", brand });
 	} catch (error) {
