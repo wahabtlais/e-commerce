@@ -1,0 +1,17 @@
+/* src/index.css or src/App.css */
+@import "./assets/fonts/fonts.css";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Rubik", sans-serif;
+}
+
+a {
+	text-decoration: none;
+	display: inline-block;
+}
