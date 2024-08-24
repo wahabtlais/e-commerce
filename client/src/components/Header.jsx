@@ -1,6 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
-import Dropdown from "./UI/Dropdown";
+import Dropdown from "./Dropdown";
 
 const Header = () => {
 	return (

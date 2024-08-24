@@ -34,7 +34,7 @@ const Dropdown = ({
 			</div>
 			{isOpen && (
 				<ul
-					className="absolute right-0 w-64 mt-10 bg-white border border-gray-300 flex flex-col"
+					className="absolute right-0 w-64 mt-10 bg-white border border-gray-300 flex flex-col z-10"
 					onClick={closeDropdown}
 				>
 					<li className="border-b-[1px] mx-4">
