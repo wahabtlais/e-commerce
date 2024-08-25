@@ -131,9 +131,9 @@ const Header = () => {
 										</NavLink>
 										<NavLink
 											className="text-white font-rregular text-sm uppercase"
-											to="/"
+											to="store"
 										>
-											Our Store
+											Store
 										</NavLink>
 										<NavLink
 											className="text-white font-rregular text-sm uppercase"

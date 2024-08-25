@@ -54,6 +54,9 @@ function SpecialPCard({
 						isHovered ? "opacity-100" : "opacity-0"
 					}`}
 				/>
+				<div className="flex items-center justify-center px-1 rounded-sm bg-red-600 absolute top-2 left-2">
+					<p className="text-xs font-rregular text-white">Sale</p>
+				</div>
 				<div className="absolute overflow-hidden right-[-30px] top-0 group-hover:top-4 group-hover:right-3 transition-all duration-300 ease-in-out">
 					<div className="flex flex-col gap-1">
 						<Link className="rounded-full hover:bg-amber-400 flex items-center justify-center w-7 h-7">

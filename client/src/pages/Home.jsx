@@ -9,6 +9,7 @@ import "swiper/css/scrollbar";
 import "swiper/css/autoplay"; // Import autoplay CSS
 import CollectionCard from "../components/CollectionCard";
 import SpecialPCard from "../components/SpecialPCard";
+import FeaturedCard from "../components/FeaturedCard";
 
 const Home = () => {
 	return (
@@ -440,6 +441,86 @@ const Home = () => {
 					</div> */}
 				</div>
 			</section>
+
+			<section className="py-12 bg-slate-100">
+				<div className="container mx-auto px-4 max-w-screen-2xl">
+					{/* <div className="flex">
+						<div className="w-full flex gap-5"> */}
+
+					<Swiper
+						// modules={[Autoplay]}
+						loop={true}
+						navigation
+						pagination={{ clickable: true }}
+						autoplay={{
+							delay: 3000,
+							disableOnInteraction: false,
+						}}
+						breakpoints={{
+							640: {
+								slidesPerView: 2, // 1 slide on small screens
+								spaceBetween: 10,
+							},
+							768: {
+								slidesPerView: 3, // 2 slides on medium screens
+								spaceBetween: 15,
+							},
+							1024: {
+								slidesPerView: 4, // 3 slides on larger screens
+								spaceBetween: 20,
+							},
+							1280: {
+								slidesPerView: 4, // 4 slides on extra-large screens
+								spaceBetween: 20,
+							},
+						}}
+					>
+						<SwiperSlide>
+							<FeaturedCard
+								image="/assets/images/cms-banner-01.jpg"
+								heading="Big Screen"
+								title="Smart Watch Series 7"
+								subtitle="From $399or $16.62/mo. for 24 mo.*"
+								titleColor="text-white"
+								smallTextColor="text-gray-100"
+							/>
+						</SwiperSlide>
+						<SwiperSlide>
+							<FeaturedCard
+								image="/assets/images/cms-banner-02.jpg"
+								heading="Studio Display"
+								title="600 nits of brightness."
+								subtitle="27-inch 5K Retina display"
+								titleColor="text-gray-900"
+								smallTextColor="text-gray-700"
+							/>
+						</SwiperSlide>
+						<SwiperSlide>
+							<FeaturedCard
+								image="/assets/images/cms-banner-03.jpg"
+								heading="Smartphones"
+								title="Smartphone 13 Pro."
+								subtitle="Now in Green. From $999.00 or $41.62/mo.for 24 mo. Footnote*"
+								titleColor="text-gray-900"
+								smallTextColor="text-gray-700"
+							/>
+						</SwiperSlide>
+						<SwiperSlide>
+							<FeaturedCard
+								image="/assets/images/cms-banner-04.jpg"
+								heading="Home Speakers"
+								title="Room-filling sound."
+								subtitle="From $699 or $116.58/mo. for 12 mo.*"
+								titleColor="text-gray-900"
+								smallTextColor="text-gray-700"
+							/>
+						</SwiperSlide>
+					</Swiper>
+					{/* </div>
+					</div> */}
+				</div>
+			</section>
+
 			<section className="py-12 bg-slate-100">
 				<div className="container mx-auto px-4 max-w-screen-2xl">
 					{/* <div className="flex">
@@ -565,6 +646,160 @@ const Home = () => {
 							/>
 						</SwiperSlide>
 					</Swiper>
+					{/* </div>
+					</div> */}
+				</div>
+			</section>
+
+			<section className="py-12 bg-slate-100">
+				<div className="container mx-auto px-4 max-w-screen-2xl">
+					{/* <div className="flex">
+						<div className="w-full flex gap-5"> */}
+					<h2 className="text-2xl font-semibold text-gray-900 mb-5">
+						Our Popular Products
+					</h2>
+					<div className="flex">
+						<div className="bg-white rounded-xl shadow-custom  w-[35%] h-full mr-5 py-2">
+							<ul>
+								<li>
+									<a
+										href="#"
+										className="flex items-center gap-5 p-3 hover:bg-slate-100 transition-all duration-300"
+									>
+										<img src="/assets/images/tab-icon-02.png" alt="" />
+										<h2 className="font-rregular text-sm active:text-black text-gray-500">
+											Electronics
+										</h2>
+									</a>
+								</li>
+								<li>
+									<a
+										href="#"
+										className="flex items-center gap-5 p-3 hover:bg-slate-100 transition-all duration-300"
+									>
+										<img src="/assets/images/tab-icon-01.png" alt="" />
+										<h2 className="font-rregular text-sm active:text-black text-gray-500">
+											Headphones
+										</h2>
+									</a>
+								</li>
+								<li>
+									<a
+										href="#"
+										className="flex items-center gap-5 p-3 hover:bg-slate-100 transition-all duration-300"
+									>
+										<img src="/assets/images/tab-icon-03.png" alt="" />
+										<h2 className="font-rregular text-sm active:text-black text-gray-500">
+											Appliances
+										</h2>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<Swiper
+							// modules={[Autoplay]}
+							loop={true}
+							navigation
+							pagination={{ clickable: true }}
+							autoplay={{
+								delay: 3000,
+								disableOnInteraction: false,
+							}}
+							breakpoints={{
+								640: {
+									slidesPerView: 2, // 1 slide on small screens
+									spaceBetween: 10,
+								},
+								768: {
+									slidesPerView: 2, // 2 slides on medium screens
+									spaceBetween: 15,
+								},
+								1024: {
+									slidesPerView: 4, // 3 slides on larger screens
+									spaceBetween: 20,
+								},
+								1280: {
+									slidesPerView: 4, // 4 slides on extra-large screens
+									spaceBetween: 20,
+								},
+							}}
+						>
+							<SwiperSlide>
+								<CollectionCard
+									image="/assets/images/12.jpg"
+									hoverImage="/assets/images/12_02.jpg"
+									brand="Momax"
+									title="Vybrix Magnetic Power Bank Wireless Charging"
+									price="32.00"
+									colors={["#000000", "#888888", "#00BFFF", "#FFFFFF"]}
+								/>
+							</SwiperSlide>
+							<SwiperSlide>
+								<CollectionCard
+									image="/assets/images/11.jpg"
+									hoverImage="/assets/images/11_02.jpg"
+									brand="Samsung"
+									title="Samsung R6 Wireless 360° Multiroom Speaker"
+									price="43.00"
+								/>
+							</SwiperSlide>
+							<SwiperSlide>
+								<CollectionCard
+									image="/assets/images/20.jpg"
+									hoverImage="/assets/images/20_02.jpg"
+									brand="Mcdodo"
+									title="Phonokart USB Type C OTG Pendrive Cable"
+									price="14.00"
+									colors={["#000000", "#888888"]}
+								/>
+							</SwiperSlide>
+							<SwiperSlide>
+								<CollectionCard
+									image="/assets/images/16.jpg"
+									hoverImage="/assets/images/16_02.jpg"
+									brand="HP"
+									title="Microware 9  Cap DualSense Wireless Controller"
+									price="32.00"
+								/>
+							</SwiperSlide>
+							<SwiperSlide>
+								<CollectionCard
+									image="/assets/images/17.jpg"
+									hoverImage="/assets/images/17_02.jpg"
+									brand="Logi"
+									title="Logitech M350 WHITE Optical Wireless Mouse"
+									price="20.00"
+								/>
+							</SwiperSlide>
+							<SwiperSlide>
+								<CollectionCard
+									image="/assets/images/09.jpg"
+									hoverImage="/assets/images/09_02.jpg"
+									brand="Boss"
+									title="J.P.Gold Wireless Stereo Earphones Headphonea"
+									price="15.00"
+								/>
+							</SwiperSlide>
+							<SwiperSlide>
+								<CollectionCard
+									image="/assets/images/18.jpg"
+									hoverImage="/assets/images/18_02.jpg"
+									brand="Google"
+									title="Google Home Smart Voice Activated Speaker"
+									price="25.00"
+								/>
+							</SwiperSlide>
+							<SwiperSlide>
+								<CollectionCard
+									image="/assets/images/14.jpg"
+									hoverImage="/assets/images/14_02.jpg"
+									brand="Apple"
+									title="Apple HomePod Assistant and Voice Recognition"
+									price="50.00"
+								/>
+							</SwiperSlide>
+						</Swiper>
+					</div>
 					{/* </div>
 					</div> */}
 				</div>
