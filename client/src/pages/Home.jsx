@@ -10,10 +10,12 @@ import "swiper/css/autoplay"; // Import autoplay CSS
 import CollectionCard from "../components/CollectionCard";
 import SpecialPCard from "../components/SpecialPCard";
 import FeaturedCard from "../components/FeaturedCard";
+import Meta from "../components/Meta";
 
 const Home = () => {
 	return (
 		<>
+			<Meta title="ZipZap" />
 			<section className="py-12">
 				<div className="container mx-auto px-4 max-w-screen-2xl">
 					<div className="flex w-full gap-6">
