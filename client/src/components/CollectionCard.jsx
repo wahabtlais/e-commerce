@@ -14,7 +14,7 @@ function CollectionCard({
 	return (
 		<Link
 			to="#"
-			className="bg-white rounded-xl shadow-custom group"
+			className="bg-white rounded-xl shadow-custom group mb-2 overflow-hidden"
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
 		>
@@ -70,7 +70,7 @@ function CollectionCard({
 				</div>
 				<p className="text-base text-gray-950 font-rregular mt-3">${price}</p>
 			</div>
-			<div className="absolute overflow-hidden right-[-20px] group-hover:top-4 group-hover:right-3 transition-all duration-300 ease-in-out">
+			<div className="absolute overflow-hidden right-[-50px] top-4 group-hover:right-3 transition-all duration-300 ease-in-out">
 				<div className="flex flex-col gap-2">
 					<Link className="rounded-full hover:bg-amber-400 flex items-center justify-center w-7 h-7">
 						<img src="/assets/images/wish.svg" alt="wish" className="w-4 h-4" />

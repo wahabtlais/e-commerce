@@ -4,6 +4,11 @@ export default {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		extend: {
+			maxWidth: {
+				"3xl": "1600px",
+				"4xl": "1920px",
+				// Add more breakpoints if needed
+			},
 			colors: {
 				dark: "#131921",
 				// grey: "#3b4149",

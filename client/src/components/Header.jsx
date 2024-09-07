@@ -6,7 +6,7 @@ const Header = () => {
 	return (
 		<>
 			<header>
-				<div className="container mx-auto px-6 max-w-screen-2xl bg-dark border-b-gray-500 border-b-[1px] py-3">
+				<div className="container mx-auto px-6 max-w-4xl bg-dark border-b-gray-500 border-b-[1px] py-3">
 					<div className="flex flex-wrap justify-between">
 						<div className="">
 							<p className="text-white mb-0 text-sm font-rregular lg:block hidden">
@@ -21,7 +21,7 @@ const Header = () => {
 					</div>
 				</div>
 				<nav className="">
-					<div className="container mx-auto px-4 max-w-screen-2xl bg-dark py-4">
+					<div className="container mx-auto px-4 max-w-4xl bg-dark py-4">
 						<div className="flex flex-wrap justify-between items-center">
 							<div className="flex w-[50%] gap-16 items-center">
 								<div>
@@ -105,7 +105,7 @@ const Header = () => {
 							</div>
 						</div>
 					</div>
-					<div className="bg-slate-800 container mx-auto px-4 max-w-screen-2xl py-4">
+					<div className="bg-slate-800 container mx-auto px-4 max-w-4xl py-4">
 						<div className="flex flex-wrap">
 							<div className="w-full">
 								<div className="flex items-center">
@@ -137,7 +137,7 @@ const Header = () => {
 										</NavLink>
 										<NavLink
 											className="text-white font-rregular text-sm uppercase"
-											to="/"
+											to="blog"
 										>
 											Blogs
 										</NavLink>

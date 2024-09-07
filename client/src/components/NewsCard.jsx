@@ -1,17 +1,19 @@
 import CustomButton from "./CustomButton";
 
-function NewsCard({ image, date, title, description }) {
+function NewsCard({ image, date, title, description, author }) {
 	return (
 		<div className="bg-white rounded-xl shadow-custom">
-			<div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat">
+			<div className="relative overflow-hidden bg-cover bg-no-repeat">
 				<img
 					src={`/assets/images/${image}`}
 					alt="blog"
-					className="w-full h-auto rounded-t-lg max-w-xs transition duration-300 ease-in-out hover:scale-110"
+					className="w-full h-auto rounded-t-lg object-cover transition duration-300 ease-in-out hover:scale-110"
 				/>
 			</div>
 			<div className="pt-6 pb-8 px-5">
-				<p className="text-sm text-gray-500 font-rregular mb-3">{date}</p>
+				<p className="text-sm text-gray-500 font-rregular mb-3">
+					{date} {author !== undefined ? <span> - {author}</span> : ""}
+				</p>
 				<h3 className="text-lg font-rmedium text-gray-900 truncate mb-3 hover:text-amber-500 cursor-pointer">
 					{title}
 				</h3>

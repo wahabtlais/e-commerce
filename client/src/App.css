@@ -15,3 +15,46 @@ a {
 	text-decoration: none;
 	display: inline-block;
 }
+
+/*? Hero Section */
+
+/*! Hero Section */
+
+/** Contact Us **/
+
+.contact-info-icon-container {
+	@apply bg-slate-600 p-2 rounded-full;
+}
+
+.contact-info-icon {
+	@apply fill-gray-100 h-4 w-4;
+}
+
+.contact-info {
+	@apply text-gray-700 font-rregular text-sm;
+}
+
+.contact-form-input {
+	@apply border-gray-400 text-sm text-gray-700 font-rregular rounded-xl focus:ring-0 focus:border-gray-800 focus:border-2 !important;
+}
+
+.section-title {
+	@apply text-4xl font-rmedium text-gray-950 mb-5;
+}
+
+.contact-info-centered {
+	@apply flex gap-2 items-center;
+}
+
+.map-container {
+	@apply flex w-full mb-8;
+}
+
+.input-half {
+	@apply w-[48%];
+}
+
+.flex-even {
+	@apply flex justify-between;
+}
+/*! Contact Us **/

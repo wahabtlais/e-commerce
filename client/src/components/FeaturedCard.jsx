@@ -11,11 +11,11 @@ function FeaturedCard({
 	return (
 		<div className="bg-white rounded-xl shadow-custom group overflow-hidden">
 			<div className="flex flex-col h-full ">
-				<Link className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat">
+				<Link className="relative overflow-hidden bg-cover bg-no-repeat">
 					<img
 						src={image}
 						alt="banner"
-						className="rounded-xl max-w-xs transition duration-300 ease-in-out group-hover:scale-110"
+						className="rounded-xl transition duration-300 ease-in-out group-hover:scale-110"
 					/>
 				</Link>
 				<div className="absolute top-[9%] left-10 pr-3">

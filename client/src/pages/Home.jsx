@@ -43,12 +43,12 @@ const Home = () => {
 							</div>
 						</div>
 						<div className="w-[50%]">
-							<div className="grid gap-6 grid-cols-2">
-								<div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat">
+							<div className="grid gap-6 grid-cols-2 2xl:justify-items-end h-full 2xl:content-between">
+								<div className="relative overflow-hidden bg-cover bg-no-repeat">
 									<img
 										src="/assets/images/catbanner-01.jpg"
 										alt="banner"
-										className=" h-auto rounded-lg shadow-custom max-w-xs transition duration-300 ease-in-out hover:scale-110 cursor-pointer"
+										className=" h-auto rounded-lg shadow-custom transition duration-300 ease-in-out hover:scale-110 cursor-pointer"
 									/>
 									<div className="absolute top-[18%] left-9">
 										<h4 className="text-sm text-amber-700 uppercase font-rregular mb-3">
@@ -64,11 +64,11 @@ const Home = () => {
 										</p>
 									</div>
 								</div>
-								<div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat">
+								<div className="relative overflow-hidden bg-cover bg-no-repeat">
 									<img
 										src="/assets/images/catbanner-03.jpg"
 										alt="banner"
-										className="h-auto rounded-lg shadow-custom max-w-xs transition duration-300 ease-in-out hover:scale-110 cursor-pointer"
+										className="h-auto rounded-lg shadow-custom transition duration-300 ease-in-out hover:scale-110 cursor-pointer"
 									/>
 									<div className="absolute top-[18%] left-9">
 										<h4 className="text-sm text-amber-700 uppercase font-rregular mb-3">
@@ -84,11 +84,11 @@ const Home = () => {
 										</p>
 									</div>
 								</div>
-								<div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat">
+								<div className="relative overflow-hidden bg-cover bg-no-repeat">
 									<img
 										src="/assets/images/catbanner-02.jpg"
 										alt="banner"
-										className="h-auto rounded-lg shadow-custom max-w-xs transition duration-300 ease-in-out hover:scale-110 cursor-pointer"
+										className="h-auto rounded-lg shadow-custom transition duration-300 ease-in-out hover:scale-110 cursor-pointer"
 									/>
 									<div className="absolute top-[18%] left-9">
 										<h4 className="text-sm text-amber-700 uppercase font-rregular mb-3">
@@ -104,11 +104,11 @@ const Home = () => {
 										</p>
 									</div>
 								</div>
-								<div className="relative  max-w-xs overflow-hidden bg-cover bg-no-repeat">
+								<div className="relative overflow-hidden bg-cover bg-no-repeat">
 									<img
 										src="/assets/images/catbanner-04.jpg"
 										alt="banner"
-										className="h-auto rounded-lg shadow-custom max-w-xs transition duration-300 ease-in-out hover:scale-110 cursor-pointer"
+										className="h-auto rounded-lg shadow-custom transition duration-300 ease-in-out hover:scale-110 cursor-pointer"
 									/>
 									<div className="absolute top-[18%] left-9">
 										<h4 className="text-sm text-amber-700 uppercase font-rregular mb-3">
