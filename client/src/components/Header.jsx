@@ -49,7 +49,10 @@ const Header = () => {
 							<div className="w-[50%]">
 								<div className="flex items-center gap-7 justify-end">
 									<div>
-										<Link className="flex gap-[10px] items-center">
+										<Link
+											className="flex gap-[10px] items-center"
+											to="/compare-products"
+										>
 											<img
 												src="/assets/images/compare.svg"
 												alt="compare"
@@ -131,13 +134,13 @@ const Header = () => {
 										</NavLink>
 										<NavLink
 											className="text-white font-rregular text-sm uppercase"
-											to="store"
+											to="/store"
 										>
 											Store
 										</NavLink>
 										<NavLink
 											className="text-white font-rregular text-sm uppercase"
-											to="blog"
+											to="/blog"
 										>
 											Blogs
 										</NavLink>

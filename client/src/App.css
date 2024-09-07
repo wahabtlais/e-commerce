@@ -20,7 +20,7 @@ a {
 
 /*! Hero Section */
 
-/** Contact Us **/
+/*? Contact Us **/
 
 .contact-info-icon-container {
 	@apply bg-slate-600 p-2 rounded-full;
@@ -58,3 +58,19 @@ a {
 	@apply flex justify-between;
 }
 /*! Contact Us **/
+
+/*? Compare Products */
+
+.compare-product-card-li {
+	@apply flex py-3 border-t border-gray-300 justify-between items-center;
+}
+
+.compare-product-card-li-title {
+	@apply font-rmedium text-sm;
+}
+
+.compare-product-card-li-value {
+	@apply font-rregular text-sm text-slate-500;
+}
+
+/*! Compare Products */
