@@ -43,6 +43,7 @@ const CompareProducts = () => {
 		<>
 			<Meta title="Compare Products" />
 			<div className="bg-gray-100 py-12">
+				test
 				<div className="container mx-auto px-4 max-w-screen-2xl">
 					<div className="flex w-full">
 						<section className="p-8">
