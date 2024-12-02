@@ -16,7 +16,7 @@ const CompareProductsCard = ({
 		<Link className="relative bg-white rounded-lg border shadow-md max-w-xs md:max-w-none overflow-hidden group">
 			<div className="relative overflow-hidden cursor-pointer">
 				<img
-					className={`h-56 lg:h-60 w-full transition-opacity duration-500 rounded-t-xl`}
+					className={`h-56 lg:h-60 w-full transition-opacity duration-500 rounded-t-xl object-contain`}
 					src={image}
 					alt="Image"
 				/>

@@ -1,47 +1,24 @@
-import CompareProductsCard from "../components/CompareProductsCard";
 import Meta from "../components/Meta";
+import WishlistCard from "../components/WishlistCard";
 
-const CompareProducts = () => {
+const Wishlist = () => {
 	const products = [
 		// Your products data here
 		{
 			image: "/assets/images/12.jpg",
 			title: "Vybrix Magnetic Power Bank Wireless Charging",
 			price: "32.00",
-			vendor: "Momax",
-			type: "Power Bank",
-			sku: "",
-			availability: "In Stock",
-			colors: ["#000000", "#888888", "#00BFFF", "#FFFFFF"],
-			sizes: ["S", "M", "L", "XL"],
 		},
 		{
 			image: "/assets/images/12.jpg",
 			title: "Vybrix Magnetic Power Bank Wireless Charging",
 			price: "32.00",
-			vendor: "Momax",
-			type: "Power Bank",
-			sku: "",
-			availability: "In Stock",
-			colors: ["#000000", "#888888", "#00BFFF", "#FFFFFF"],
-			sizes: ["S", "L", "XL"],
-		},
-		{
-			image: "/assets/images/12.jpg",
-			title: "Vybrix Magnetic Power Bank Wireless Charging",
-			price: "32.00",
-			vendor: "Momax",
-			type: "Power Bank",
-			sku: "",
-			availability: "In Stock",
-			colors: ["#000000", "#888888", "#00BFFF", "#FFFFFF"],
-			sizes: ["M", "L"],
 		},
 	];
 
 	return (
 		<>
-			<Meta title="Compare Products" />
+			<Meta title="Wishlist" />
 			<div className="bg-gray-100 py-12">
 				<div className="container mx-auto px-4 max-w-screen-2xl">
 					<div className="flex w-full">
@@ -51,17 +28,11 @@ const CompareProducts = () => {
 							{/*  grid grid-cols-1 gap-4 //1*/}
 							<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 								{products.map((product, index) => (
-									<CompareProductsCard
+									<WishlistCard
 										key={index}
 										image={product.image}
 										title={product.title}
 										price={product.price}
-										vendor={product.vendor}
-										type={product.type}
-										sku={product.sku}
-										availability={product.availability}
-										colors={product.colors}
-										sizes={product.sizes}
 									/>
 								))}
 							</div>
@@ -73,4 +44,4 @@ const CompareProducts = () => {
 	);
 };
 
-export default CompareProducts;
+export default Wishlist;

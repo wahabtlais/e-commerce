@@ -64,7 +64,10 @@ const Header = () => {
 										</Link>
 									</div>
 									<div>
-										<Link className="flex gap-[10px] items-center">
+										<Link
+											className="flex gap-[10px] items-center"
+											to="/wishlist"
+										>
 											<img
 												src="/assets/images/wishlist.svg"
 												alt="compare"
